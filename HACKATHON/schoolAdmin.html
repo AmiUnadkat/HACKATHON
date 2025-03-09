@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Admin Dashboard</title>
+    <link rel="stylesheet" href="schoolAdmin.css" />
+    <script src="schoolAdmin.js"></script>
+    <!-- <?php include 'filename.php'; ?> -->
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <nav>
+          <div class="nav">
+            <ul>
+              <li><a href="#announcement">Announcement</a></li>
+              <li><a href="#activities">Activities</a></li>
+              <li><a href="#marks">Marks</a></li>
+              <li><a href="#timetable">Time Table</a></li>
+              <li><a href="#teacher-list">Teacher List</a></li>
+              <li><a href="#students">Students</a></li>
+            </ul>
+          </div>
+          <div class="log-out">
+            <a class="logout" id="logoutBtn" href="#" style="position: sticky"
+              >Log Out</a
+            >
+          </div>
+        </nav>
+      </aside>
+      <div class="main">
+        <!-- Main Content -->
+        <main class="main-content">
+          <header>
+            <h1>SCHOOL NAME</h1>
+            <p class="notice">Notice</p>
+          </header>
+
+          <!-- Image Gallery -->
+          <div class="gallery">
+            <img src="/schoolAdmin/Resource/sch1.webp" alt="School" />
+            <img src="/schoolAdmin/Resource/sch2.jpg" alt="School" />
+            <img src="/schoolAdmin/Resource/sch3.jpeg" alt="School" />
+            <img src="/schoolAdmin/Resource/sch4.jpg" alt="School" />
+            <img src="/schoolAdmin/Resource/sch5.jpeg" alt="School" />
+          </div>
+          `
+          <!-- Principal Section -->
+          <div class="card">
+            <img
+              src="/schoolAdmin/Resource/principal.jpeg"
+              alt="Principal"
+              class="principal-img"
+            />
+            <div class="card-content">
+              <h2 id="principalName">Principal Name</h2>
+              <p>Degrees</p>
+              <p>AGE: <span id="principalAge">30</span> years</p>
+              <p>Email: <span id="principalEmail">shah007@gmail.com</span></p>
+              <p>Contact: <span id="principalContact">+91 xxxxx xxxxx</span></p>
+              <p id="principalDesc">Short Description</p>
+              <button class="edit-btn" id="editBtn">EDIT</button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats">
+            <p>Admissions: <span id="admissions">69</span></p>
+            <p>Total Teachers: <span id="teachers">69</span></p>
+          </div>
+
+          <!-- Sections -->
+          <!-- Announcements Section with PDF Upload -->
+          <section id="announcement">
+            <div class="announcement">
+              <h2>Announcements</h2>
+              <p>Latest updates and news about the school.</p>
+              <input
+                type="file"
+                id="announcementFile"
+                accept="application/pdf"
+              />
+              <ul id="announcementList"></ul>
+            </div>
+          </section>
+
+          <!-- Activities Section with Image Upload, Heading & Caption -->
+          <section id="activities">
+            <div class="activities">
+              <h2>Activities</h2>
+            <p>Details about extracurricular and school events.</p>
+
+            <input
+              type="text"
+              id="activityTitle"
+              placeholder="Enter activity title"
+            />
+            <input
+              type="text"
+              id="activityCaption"
+              placeholder="Enter activity caption"
+            />
+            <input type="file" id="activityImages" accept="image/*" multiple />
+            <button onclick="addActivity()">Add Activity</button>
+
+            <div class="activity-container" id="activityList"></div>
+            </div>
+          </section>
+
+          <!-- Marks Section -->
+           <section id="marks">
+       <div class="marks">
+        <h2>Marks Entry</h2>
+        <label for="studentId">Enter Student ID:</label>
+        <input type="text" id="studentId" placeholder="Search by ID">
+        <button onclick="searchStudent()">Search</button>
+
+        <div id="studentInfo" class="hidden">
+            <h3>Student Details</h3>
+            <p><strong>ID:</strong> <span id="displayId"></span></p>
+            <p><strong>Name:</strong> <span id="displayName"></span></p>
+            <button onclick="openMarksForm()">Add Marks</button>
+        </div>
+       </div>
+    </section>
+
+    <!-- Marks Entry Modal -->
+    <div id="marksModal" class="modal hidden">
+        <h3>Enter Marks</h3>
+        <form id="marksForm" action="save_marks.php" method="POST">
+            <input type="hidden" id="modalStudentId" name="student_id">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+            <label for="marks">Marks:</label>
+            <input type="number" id="marks" name="marks" required>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="closeMarksForm()">Close</button>
+        </form>
+    </div>
+
+      <!-- "Student Not Found" Popup -->
+      <div id="notFoundModal" class="modal hidden student-not-found">
+        <h3>Student Not Found</h3>
+        <p>No student exists with this ID. Please try again.</p>
+        <button onclick="closeNotFoundPopup()">Okay</button>
+    </div>
+
+          <!-- Time Table Section with PDF Upload -->
+          <section id="timetable">
+            <h2>Time Table</h2>
+            <p>Class schedules and exam dates.</p>
+            <input type="file" id="timetableFile" accept="application/pdf" />
+            <ul id="timetableList"></ul>
+          </section>
+
+          <!-- Teacher List Section -->
+          <section id="teacher-list">
+            <h2>Teacher List</h2>
+            <p>List of particular school Teachers.</p>
+          </section>
+
+          <!-- Students Section -->
+          <section id="students">
+            <h2>Students</h2>
+            <p>Student records and profiles.</p>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
